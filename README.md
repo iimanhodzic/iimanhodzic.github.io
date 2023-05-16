@@ -15,10 +15,7 @@ Technologies:
 
 Frontend: HTML, CSS, JavaScript
 Backend: Firebase
-Plans for the future:
 
-Adding authentication for user accounts
-Code optimization and application performance improvement
 How to contribute to the project:
 
 If you want to contribute to this project, feel free to clone the repository and send me a pull request. All suggestions and contributions are welcome!
