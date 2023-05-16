@@ -1,0 +1,556 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  /*
+        Purple: hsl(250, 66%, 75%)
+        Blue: hsl(207, 90%, 72%)
+        Pink: hsl(356, 66%, 75%)
+        Teal: hsl(174, 63%, 62%)
+  */
+  --first-hue: 250;
+  --sat: 66%;
+  --lig: 75%;
+  --second-hue: 219;
+  --first-color: hsl(var(--first-hue), var(--sat), var(--lig));
+  --first-color-alt: hsl(var(--first-hue), var(--sat), 71%); /* -4% */
+  --title-color: hsl(var(--second-hue), 15%, 95%);
+  --text-color: hsl(var(--second-hue), 8%, 75%);
+  --text-color-light: hsl(var(--second-hue), 4%, 55%);
+  --body-color: hsl(var(--second-hue), 48%, 8%);
+  --container-color: hsl(var(--second-hue), 32%, 12%);
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: 'Poppins', sans-serif;
+  --biggest-font-size: 1.75rem;
+  --h1-font-size: 1.5rem;
+  --h2-font-size: 1.25rem;
+  --h3-font-size: 1rem;
+  --normal-font-size: .938rem;
+  --small-font-size: .813rem;
+  --smaller-font-size: 1.05rem;
+  --tiny-font-size: .625rem;
+
+  /*========== Font weight ==========*/
+  --font-medium: 500;
+  --font-semibold: 600;
+
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+  --z-modal: 1000;
+}
+
+/* Responsive typography */
+@media screen and (min-width: 968px) {
+  :root {
+    --biggest-font-size: 2.5rem;
+    --h1-font-size: 2.25rem;
+    --h2-font-size: 1.5rem;
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem;
+    --smaller-font-size: .813rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body,
+button,
+input,
+textarea {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+}
+
+body {
+  background-color: var(--body-color);
+  color: var(--text-color);
+  transition: .4s; /* for light mode animation */
+}
+
+h1, h2, h3 {
+  color: var(--title-color);
+  font-weight: var(--font-semibold);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/*=============== THEME ===============*/
+.change-theme {
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.change-theme:hover{
+  color: var(--first-color);
+}
+
+/*========== Variables Ligh theme ==========*/
+body.light-theme{
+  --title-color: hsl(var(--second-hue), 15%, 15%);
+  --text-color: hsl(var(--second-hue), 8%, 35%);
+  --body-color: hsl(var(--second-hue), 100%, 99%);
+  --container-color: #fff;
+}  
+
+/*========== 
+    Color changes in some parts of 
+    the website, in light theme
+==========*/
+
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1861px;
+  /*margin-left: 2rem;
+  margin-right: 2rem;*/
+  margin-right: 20px;
+  margin-left: 25px;
+}
+
+.grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.main {
+  overflow: hidden;
+}
+
+.section {
+  padding: 4.5rem 0 1rem;
+}
+
+.section__title, 
+.section__subtitle {
+  text-align: center;
+}
+
+.section__title {
+  font-size: var(--h2-font-size);
+  color: var(--first-color);
+  margin-bottom: 2rem;
+}
+
+.section__subtitle {
+  display: block;
+  font-size: var(--smaller-font-size);
+  color: var(--text-color-light);
+}
+
+/*=============== HEADER & NAV===============*/
+.header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--body-color);
+  z-index: var(--z-fixed);
+}
+
+.nav{
+  height: var(--header-height);
+  display: flex;
+  /*justify-content: space-between;*/
+  align-items: center;
+}
+
+.nav__logo{
+  color: var(--first-color);
+  font-weight: var(--font-medium);
+  transition: .4s;
+}
+
+.nav__logo:hover {
+  color: var(--first-color-alt);
+}
+
+.nav__menu{
+  position: fixed;
+  bottom: 1rem;
+  background-color: hsla(var(--second-hue), 32%, 16%, .8);
+  width: 90%;
+  border-radius: 4rem;
+  padding: 1rem 2.25rem;
+  backdrop-filter: blur(10px);
+}
+
+.nav__list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav__link {
+  color: var(--text-color);
+  font-size: 1.25rem;
+  padding: .4rem;
+  display: flex;
+  border-radius: 5rem;
+}
+
+/* Active link */
+
+.active-link{
+  background: linear-gradient(180deg, 
+              hsla(var(--first-hue), var(--sat), var(--lig), 1),
+              hsla(var(--first-hue), var(--sat), var(--lig), .2)
+            );
+}
+
+/*=============== HOME ===============*/
+
+.home__container{
+  position: relative;
+  row-gap: 4.5rem;
+  padding-top: 2rem;
+}
+
+.home__data{
+  text-align: center;
+}
+
+.home__greeting,
+.home__education{
+  font-size: var(--small-font-size);
+  font-weight: var(--font-medium);
+}
+
+.home__greeting{
+  display: block;
+  color: var(--title-color);
+  margin-bottom: .25rem;
+}
+
+.home__education{
+  color: var(--text-color);
+  margin-bottom: 2.5rem;
+}
+
+.home__name{
+  font-size: var(--biggest-font-size);
+}
+
+.home__handle{
+  justify-self: center;
+}
+
+.home__img{
+  border-radius: 5rem 5rem;
+}
+
+
+/*=============== BUTTONS ===============*/
+
+.button{
+  display: inline-block;
+  background-color: var(--first-color);
+  color: var(--body-color);
+  padding: .75rem 1rem;
+  border-radius: .5rem;
+  font-weight: var(--font-medium);
+  transition: .4s;
+}
+
+.button:hover{
+  background-color: var(--first-color-alt);
+  color: var(--body-color);
+}
+
+.button--ghost{
+  background-color: transparent;
+  border: 2px solid var(--first-color);
+  color: var(--first-color);
+}
+
+.nav__icons {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.nav__icon {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-left: 2rem;
+  transition: color 0.3s ease;
+}
+
+.wp {
+  padding: 1rem;
+}
+
+.button--wp {
+  background-color: transparent;
+  border: 2px solid hsl(113.28deg 67.68% 38.82%);
+  color: hsl(113.49deg 66.84% 37.84%);
+}
+
+.button--wp:hover {
+  color: white;
+  background-color: #2ea120;
+}
+
+.wp__img {
+  max-width: 15px;
+}
+
+
+
+/*=============== ABOUT ===============*/
+
+.about__container{
+  row-gap: 2.5rem;
+}
+
+.location__img{
+width: 100%;
+}
+
+.about__data{
+  text-align: center;
+}
+
+.about__info{
+  display: grid;
+  gap: .5rem;
+  margin-bottom: 2rem;
+}
+
+.about__box{
+  background-color: var(--container-color);
+  border-radius: .75rem;
+  padding: .75rem .5rem;
+}
+
+.about__icon{
+  font-size: 1.5rem;
+  color: var(--first-color);
+  margin-bottom: .5rem;
+}
+
+.about__title{
+  font-size: var(--small-font-size);
+}
+
+.about__parking{
+  max-width: 600px;
+  margin: auto;
+  margin-bottom: 2rem;
+  font-size: x-large;
+  text-align: justify;
+}
+
+.location__img{
+  width: 100%;
+  max-width: 700px;
+  height: 400px;
+  place-self: center;
+}
+.about__transport {
+  font-size: x-large;
+}
+
+/*=============== SKILLS ===============*/
+
+.skills__container{
+  row-gap: 2rem;
+  padding-top: 1rem;
+}
+
+.skills__content{
+  background-color: var(--container-color);
+  padding: 1rem;
+  border-radius: 1.25rem;
+}
+
+.skills_title{
+  font-size: var(--normal-font-size);
+  font-weight: var(--font-medium);
+  color: var(--first-color);
+  text-align: center;
+}
+
+.skillls__box{
+  display: flex;
+  justify-content: center;
+}
+
+.transport__img {
+  place-self: center;
+}
+
+/*=============== CONTACT ===============*/
+.contact__title{
+  font-size: 2rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.contact__form-div{
+  position: relative;
+  margin-bottom: 2rem;
+  height: 1.25rem;
+}
+
+.contact__form-input{
+  border: 2px solid var(--text-color);
+  border-radius: .15rem;
+  z-index: 1
+  padding: 1.5rem;
+}
+
+.contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.contact__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 364px) {
+ .home__img {
+  max-width: 220px; 
+ }
+ .home__handle {
+  width: 220px;
+  height: auto;
+  }
+}
+
+@media screen and (min-width: 365px, max-width: 659px){
+  .nav__menu{
+    padding-bottom: 1rem, 1.5rem;
+  }
+  .home__buttons{
+    flex-direction: column;
+  }
+  .home__handle{
+    width: 320px;
+    height: auto;
+  }
+  .about__info{
+    grid-template-columns: repeat(1, 1fr);
+    /*width: 247px;*/
+  }
+  .about__parking {
+    font-size: large;
+  }.about__transport {
+    font-size: large;
+  }
+}
+
+/* For medium devices */
+@media screen and (min-width: 660px){
+  .nav__menu{
+    width: 328px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+  .about__info{
+    grid-template-columns: repeat(3, 140px);
+    justify-content: center;
+  }
+  .about__description{
+    padding: 0 5rem;
+  }
+  .skills__container{
+    justify-content: center;
+  }
+  .skills__content{
+    padding: 2rem 4rem;
+  }
+  .home__img {
+    width: 420px;
+    height: auto;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 992px){
+  .section{
+    padding: 5.5rem 0 1rem;
+  }
+  .section__title{
+    margin-bottom: 3.5rem;
+  }
+  .nav{
+    height: calc(var(--header-height) + 1rem);
+  }
+  .home__handle{
+    width: 590px;
+    height: auto;
+    text-align: center;
+  }
+  .home__img{
+    width: 520px;
+  }
+  .about__container{
+    grid-template-columns: repeat(1, 1fr);
+    align-items: center; column-gap: 4rem;
+  }
+  .about__img{
+    width: 350px;
+  }
+  .about__info{
+    justify-content: center;
+  }
+  .about__box{
+    text-align: center;
+    padding: 1rem 1.25rem;
+  }
+  .about__description{
+    padding: 0 4rem 0 0;
+    margin-bottom: 2.5rem;
+  }
+  .skills__container{
+    grid-template-columns: repeat(2, 550px);
+    column-gap: 3rem;
+  }
+
+}
